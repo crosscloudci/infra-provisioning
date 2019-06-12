@@ -5,7 +5,7 @@ WORKER_NODE_COUNT=${WORKER_NODE_COUNT:-1}
 FACILITYS=${FACILITYS:-sjc1 erw1 ams1 nrt1 dfw2}
 PLAN=${PLAN:-c1.small.x86}
 
-#Master Capacity
+#Start Capacity loop.
 while [ "$MASTER_CAPACITY" != "true" ] || [ "$WORKER_CAPACITY" != "true" ]; do
     for facility in $FACILITYS; do
         export FACILITY=$facility
