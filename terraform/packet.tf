@@ -1,4 +1,4 @@
-resource "packet_device" "cnfs" {
+resource "packet_device" "cncf" {
   count            = "${ var.packet_node_count }"
   hostname         = "${ var.name }${ count.index + 1 }"
   facility         = "${ var.packet_facility }"
@@ -7,17 +7,4 @@ resource "packet_device" "cnfs" {
   billing_cycle    = "${ var.packet_billing_cycle }" # hourly or monthly
   operating_system = "${ var.packet_operating_system }"
  
-  connection {
-    type     = "ssh"
-    user     = "root"
-    private_key = "${ file("/root/.ssh/id_rsa")}"
-}
-  
-  provisioner "ansible" {
-    plays {
-      playbook ={
-        file_path = "${ var.playbook }"
-      }
-    }
-  }
 }
