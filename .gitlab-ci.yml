@@ -57,7 +57,10 @@ Provisioning:
          echo "Skipping reservations"
       fi
     - cd terraform
-    - terraform init
+    - terraform init \
+                -backend-config "bucket=${AWS_BUCKET}" \
+                -backend-config "key=aws-${TF_VAR_name}" \
+                -backend-config "region=${AWS_DEFAULT_REGION}"
     - terraform apply
   dependencies:
     - Check-Capacity
