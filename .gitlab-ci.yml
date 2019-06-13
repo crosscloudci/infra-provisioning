@@ -21,7 +21,9 @@ before_script:
 
 Check-Capacity:
   stage: Capacity
+  image: debian:stretch
   script:
+    - apt update && apt -y install jq
     - >
       if [ $CI_COMMIT_REF_NAME == "production" ]; then
          echo "Checking for reserved servers."
@@ -30,8 +32,6 @@ Check-Capacity:
          echo "Checking for on-demand servers."
          export RESERVED=false
       fi
-    - sleep 10000
-    - chmod +x ./capacity.sh
     - ./capacity.sh
     - echo "TF_VAR_packet_facility=$FACILITY" > facility.env
 
