@@ -4,6 +4,7 @@ stages:
   - Release
 
 before_script:
+  - export CI_COMMIT_SHA_SHORT=$(echo ${CI_COMMIT_SHA} | cut -c -8)
   - export BASE_URL=${BASE_URL:-$(echo $CI_PROJECT_URL |  cut -d'/' -f1-3)}
   - >
     if [ "$BASE_URL" == "https://gitlab.cncf.ci" ]; then
@@ -49,6 +50,7 @@ Provisioning:
     entrypoint: [""]
   script:
     - source facility.env
+    - export TF_VAR_name=${CI_COMMIT_SHA_SHORT}-${CI_JOB_ID}-${ENVIRONMENT}
     - >
       if [ $CI_COMMIT_REF_NAME == "production" ]; then
          echo "Write reserved node config"
