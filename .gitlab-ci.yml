@@ -48,8 +48,8 @@ Provisioning:
     - cd terraform
     - terraform init
     - terraform apply
-  dependencies:
-    - Capacity
+  # dependencies:
+  #   - Capacity
 
 
 
