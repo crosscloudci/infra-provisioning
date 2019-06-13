@@ -44,8 +44,9 @@ Check-Capacity:
 
 Provisioning:
   stage: Provisioning
-  image: hashicorp/terraform:0.12.2
-  entrypoint: [""]
+  image:
+    name: hashicorp/terraform:0.12.2
+    entrypoint: [""]
   script:
     - source facility.env
     - >
