@@ -3,7 +3,16 @@ stages:
   - Provisioning
   - Release
 
-before_script; then
+before_script:
+  - export BASE_URL=${BASE_URL:-$(echo $CI_PROJECT_URL |  cut -d'/' -f1-3)}
+  - >
+    if [ "$BASE_URL" == "https://gitlab.cncf.ci" ]; then
+      export ENVIRONMENT="pd"
+    elif [ "$BASE_URL" == "https://gitlab.staging.cncf.ci" ]; then
+      export ENVIRONMENT="sg"
+    elif [ "$BASE_URL" == "https://gitlab.dev.cncf.ci" ]; then
+      export ENVIRONMENT="dv"
+    elif [ "$BASE_URL" == "https://gitlab.cidev.cncf.ci" ]; then
       export ENVIRONMENT="ci"
     else
       echo "Environment unknown: $BASE_URL"
@@ -48,9 +57,5 @@ Provisioning:
     - cd terraform
     - terraform init
     - terraform apply
-  # dependencies:
-  #   - Capacity
-
-
-
-
+  dependencies:
+    - Capacity
