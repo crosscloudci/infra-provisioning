@@ -23,7 +23,7 @@ Check-Capacity:
   stage: Capacity
   image: debian:stretch
   script:
-    - apt update && apt -y install jq
+    - apt update && apt -y install jq curl
     - >
       if [ $CI_COMMIT_REF_NAME == "production" ]; then
          echo "Checking for reserved servers."
