@@ -58,4 +58,4 @@ Provisioning:
     - terraform init
     - terraform apply
   dependencies:
-    - Capacity
+    - Check-Capacity
