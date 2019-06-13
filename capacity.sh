@@ -1,11 +1,12 @@
 #!/bin/bash
 
-MASTER_NODE_COUNT=${MASTER_NODE_COUNT:-1}
-WORKER_NODE_COUNT=${WORKER_NODE_COUNT:-1}
-FACILITYS=${FACILITYS:-sjc1 ewr1 ams1 nrt1 dfw2}
-MASTER_PLAN=${MASTER_PLAN:-c1.small.x86}
-WORKER_PLAN=${WORKER_PLAN:-c1.small.x86}
 RESERVED=${RESERVED:-false}
+FACILITYS=${FACILITYS:-sjc1 ewr1 ams1 nrt1 dfw2}
+PACKET_AUTH_TOKEN=${PACKET_AUTH_TOKEN:-"$TF_VAR_packet_api_key"}
+MASTER_NODE_COUNT=${MASTER_NODE_COUNT:-"$TF_VAR_master_node_count"}
+WORKER_NODE_COUNT=${WORKER_NODE_COUNT:-"$TF_VAR_worker_node_count"}
+MASTER_PLAN=${MASTER_PLAN:-"$TF_VAR_packet_master_device_plan"}
+WORKER_PLAN=${WORKER_PLAN:-"$TF_VAR_packet_worker_device_plan"}
 
 #Start on-demand Capacity loop.
 if [ "$RESERVED" = "false" ]; then
