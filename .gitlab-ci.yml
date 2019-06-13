@@ -1,0 +1,52 @@
+stages:
+  - Capacity
+  - Provisioning
+  - Release
+
+before_script:
+  - export BASE_URL=${BASE_URL:-$(echo $CI_PROJECT_URL |  cut -d'/' -f1-3)}
+  - >
+    if [ "$BASE_URL" == "https://gitlab.cncf.ci" ]; then
+      export ENVIRONMENT="pd"
+    elif [ "$BASE_URL" == "https://gitlab.staging.cncf.ci" ]; then
+      export ENVIRONMENT="sg"
+    elif [ "$BASE_URL" == "https://gitlab.dev.cncf.ci" ]; then
+      export ENVIRONMENT="dv"
+    elif [ "$BASE_URL" == "https://gitlab.cidev.cncf.ci" ]; then
+      export ENVIRONMENT="ci"
+    else
+      echo "Environment unknown: $BASE_URL"
+      exit 1
+    fi
+
+Check-Capacity:
+  stage: Capacity
+  script:
+    - >
+      if [ $CI_COMMIT_REF_NAME == "production" ]; then
+         echo "Checking for reserved servers."
+         export RESERVED=true
+      else
+         echo "Checking for on-demand servers."
+         export RESERVED=false
+      fi
+    - ./capacity.sh
+    - echo "TF_VAR_packet_facility=$FACILITY" > facility.env
+
+Provisioning:
+  stage: Provisioning
+  image: hashicorp/terraform:v0.12.2
+  script:
+    - >
+      if [ $CI_COMMIT_REF_NAME == "production" ]; then
+         echo "Write reserved node config"
+         cp ./reserved_instances ./terraform/override.tf
+      else
+         echo "Skipping reservations"
+      fi
+    - cd terraform
+    - terraform init
+    - terraform apply
+
+
+
