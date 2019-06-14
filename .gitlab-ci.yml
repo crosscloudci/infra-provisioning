@@ -60,6 +60,6 @@ Provisioning:
       fi
     - cd terraform
     - terraform init -backend-config "bucket=${AWS_BUCKET}" -backend-config "key=aws-${TF_VAR_name}" -backend-config "region=${AWS_DEFAULT_REGION}"
-    - terraform apply
+    - terraform apply -auto-approve
   dependencies:
     - Check-Capacity
