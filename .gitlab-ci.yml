@@ -77,7 +77,7 @@ Provisioning:
       - .terraform
 
 Release:
-  stage: Provisioning
+  stage: Release
   image:
     name: hashicorp/terraform:0.12.2
     entrypoint: [""]
