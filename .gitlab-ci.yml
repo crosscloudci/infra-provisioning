@@ -1,5 +1,4 @@
 stages:
-  - Capacity
   - Provisioning
   - Release
 
@@ -8,20 +7,20 @@ before_script:
   - export BASE_URL=${BASE_URL:-$(echo $CI_PROJECT_URL |  cut -d'/' -f1-3)}
   - >
     if [ "$BASE_URL" == "https://gitlab.cncf.ci" ]; then
-      export ENVIRONMENT="pd"
+      export ENVIRONMENT="pd-${ENVIRONMENT}"
     elif [ "$BASE_URL" == "https://gitlab.staging.cncf.ci" ]; then
-      export ENVIRONMENT="sg"
+      export ENVIRONMENT="sg-${ENVIRONMENT}"
     elif [ "$BASE_URL" == "https://gitlab.dev.cncf.ci" ]; then
-      export ENVIRONMENT="dv"
+      export ENVIRONMENT="dv-${ENVIRONMENT}"
     elif [ "$BASE_URL" == "https://gitlab.cidev.cncf.ci" ]; then
-      export ENVIRONMENT="ci"
+      export ENVIRONMENT="ci-${ENVIRONMENT}"
     else
       echo "Environment unknown: $BASE_URL"
       exit 1
     fi
 
 Check-Capacity:
-  stage: Capacity
+  stage: Provisioning
   image: debian:stretch
   script:
     - apt update && apt -y install jq curl
@@ -50,7 +49,7 @@ Provisioning:
     entrypoint: [""]
   script:
     - source facility.env
-    - export TF_VAR_name=${CI_COMMIT_SHA_SHORT}-${CI_JOB_ID}-${ENVIRONMENT}
+    - export TF_VAR_name=${NAME}-${ENVIRONMENT}
     - >
       if [ $CI_COMMIT_REF_NAME == "production" ]; then
          echo "Write reserved node config"
@@ -59,7 +58,12 @@ Provisioning:
          echo "Skipping reservations"
       fi
     - cd terraform
-    - terraform init -backend-config "bucket=${AWS_BUCKET}" -backend-config "key=aws-${TF_VAR_name}" -backend-config "region=${AWS_DEFAULT_REGION}"
-    - terraform apply -auto-approve
+    - terraform init -backend-config "bucket=${AWS_BUCKET}" -backend-config "key=${TF_VAR_name}" -backend-config "region=${AWS_DEFAULT_REGION}"
+    - >
+      if [ $DESTROY == "true" ]; then
+         terraform destroy -force
+      else
+         terraform apply -auto-approve
+         sleep 100000
   dependencies:
     - Check-Capacity
