@@ -65,5 +65,3 @@ Provisioning:
       else
          terraform apply -auto-approve
          sleep 100000
-  dependencies:
-    - Check-Capacity
