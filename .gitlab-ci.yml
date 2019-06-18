@@ -8,13 +8,13 @@ before_script:
   - export BASE_URL=${BASE_URL:-$(echo $CI_PROJECT_URL |  cut -d'/' -f1-3)}
   - >
     if [ "$BASE_URL" == "https://gitlab.cncf.ci" ]; then
-      export ENVIRONMENT="pd-${ENVIRONMENT}"
+      export ENVIRONMENT="pd${ENVIRONMENT}"
     elif [ "$BASE_URL" == "https://gitlab.staging.cncf.ci" ]; then
-      export ENVIRONMENT="sg-${ENVIRONMENT}"
+      export ENVIRONMENT="sg${ENVIRONMENT}"
     elif [ "$BASE_URL" == "https://gitlab.dev.cncf.ci" ]; then
-      export ENVIRONMENT="dv-${ENVIRONMENT}"
+      export ENVIRONMENT="dv${ENVIRONMENT}"
     elif [ "$BASE_URL" == "https://gitlab.cidev.cncf.ci" ]; then
-      export ENVIRONMENT="ci-${ENVIRONMENT}"
+      export ENVIRONMENT="ci${ENVIRONMENT}"
     else
       echo "Environment unknown: $BASE_URL"
       exit 1
