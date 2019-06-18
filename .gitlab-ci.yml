@@ -1,4 +1,5 @@
 stages:
+  - Check-Capacity
   - Provisioning
   - Release
 
@@ -20,7 +21,7 @@ before_script:
     fi
 
 Check-Capacity:
-  stage: Provisioning
+  stage: Check-Capacity
   image: debian:stretch
   script:
     - apt update && apt -y install jq curl
@@ -65,3 +66,8 @@ Provisioning:
       else
          terraform apply -auto-approve
          sleep 100000
+      fi
+  dependencies:
+    - Check-Capacity
+
+      
