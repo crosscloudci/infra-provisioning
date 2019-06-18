@@ -61,11 +61,10 @@ Provisioning:
     - cd terraform
     - terraform init -backend-config "bucket=${AWS_BUCKET}" -backend-config "key=${TF_VAR_name}" -backend-config "region=${AWS_DEFAULT_REGION}"
     - >
-      if [ $DESTROY == "yes" ]; then
-         terraform destroy -force
-      else
+      if [ -z "$DESTROY" ]; then
          terraform apply -auto-approve
-         sleep 100000
+      else
+         terraform destroy -force
       fi
   dependencies:
     - Check-Capacity
