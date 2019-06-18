@@ -24,7 +24,13 @@ Check-Capacity:
   stage: Check-Capacity
   image: debian:stretch
   script:
-    - apt update && apt -y install jq curl
+    - >
+      if [ -z "$DESTROY" ]; then
+         apt update && apt -y install jq curl
+      else
+         echo "Skip for destroy"
+         exit 0
+      fi
     - >
       if [ $CI_COMMIT_REF_NAME == "production" ]; then
          echo "Checking for reserved servers."
@@ -81,6 +87,7 @@ Release:
     name: hashicorp/terraform:0.12.2
     entrypoint: [""]
   script:
+    - sleep 1000000
     - MASTERS=$(terraform output "masters")
     - WORKERS=$(terraform output "workers")
     - echo "MASTERS=$MASTERS" > nodes.env
