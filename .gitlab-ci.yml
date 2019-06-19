@@ -91,7 +91,7 @@ Release:
     - MASTERS=$(terraform output "masters")
     - WORKERS=$(terraform output "workers")
     - echo "MASTERS=$MASTERS" > nodes.env
-    - echo "WORKERS=$WORKERS" > nodes.env
+    - echo "WORKERS=$WORKERS" >> nodes.env
   dependencies:
     - Provisioning
   artifacts:
@@ -99,5 +99,5 @@ Release:
     untracked: true
     expire_in: 5 weeks
     paths:
-      - nodes.env
+      - terraform/nodes.env
 
