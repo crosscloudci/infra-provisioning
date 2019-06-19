@@ -25,7 +25,7 @@ Check-Capacity:
   image: debian:stretch
   only:
     variables:
-      - $DESTROY = "null"
+      - $DESTROY == null
   script:
     - >
       if [ -z "$DESTROY" ]; then
@@ -91,7 +91,7 @@ Release:
   stage: Release
   only:
     variables:
-      - $DESTROY = "null"
+      - $DESTROY == null
   image:
     name: hashicorp/terraform:0.12.2
     entrypoint: [""]
