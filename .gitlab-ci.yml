@@ -89,6 +89,9 @@ Provisioning:
 
 Release:
   stage: Release
+  only:
+    variables:
+      - $DESTROY == "null"
   image:
     name: hashicorp/terraform:0.12.2
     entrypoint: [""]
