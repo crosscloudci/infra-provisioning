@@ -23,6 +23,9 @@ before_script:
 Check-Capacity:
   stage: Check-Capacity
   image: debian:stretch
+  only:
+    variables:
+      - $DESTROY == "null"
   script:
     - >
       if [ -z "$DESTROY" ]; then
@@ -55,7 +58,10 @@ Provisioning:
     name: hashicorp/terraform:0.12.2
     entrypoint: [""]
   script:
-    - source facility.env
+    - >
+      if [ -z "$DESTROY" ]; then
+         source facility.env
+      fi
     - export TF_VAR_name="$NAME-$ENVIRONMENT"
     - >
       if [ $CI_COMMIT_REF_NAME == "production" ]; then
