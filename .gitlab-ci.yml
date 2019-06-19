@@ -87,7 +87,7 @@ Release:
     name: hashicorp/terraform:0.12.2
     entrypoint: [""]
   script:
-    - sleep 1000000
+    - cd terraform
     - MASTERS=$(terraform output "masters")
     - WORKERS=$(terraform output "workers")
     - echo "MASTERS=$MASTERS" > nodes.env
