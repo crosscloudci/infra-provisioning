@@ -10,7 +10,7 @@ WORKER_PLAN=${WORKER_PLAN:-"$TF_VAR_packet_worker_device_plan"}
 
 #Start on-demand Capacity loop.
 if [ "$RESERVED" = "false" ]; then
-    while [ "$MASTER_CAPACITY" != "true" ] || [ "$WORKER_CAPACITY" != "true" ]; do
+    while [ "$MASTER_CAPACITY" != "true" ] && [ "$WORKER_CAPACITY" != "true" ]; do
         for facility in $FACILITYS; do
             echo "Looking in facility: $facility"
             export FACILITY=$facility
