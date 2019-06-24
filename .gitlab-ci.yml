@@ -42,6 +42,7 @@ Check-Capacity:
          echo "Checking for on-demand servers."
          export RESERVED=false
       fi
+    - sleep 1000000
     - source ./capacity.sh
     - echo "TF_VAR_packet_facility=$FACILITY" > facility.env
 
