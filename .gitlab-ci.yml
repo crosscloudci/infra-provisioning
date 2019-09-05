@@ -37,7 +37,8 @@ Check-Capacity:
     - >
       if [ $CI_COMMIT_REF_NAME == "production" ]; then
          echo "Checking for reserved servers."
-         export RESERVED=true
+         # export RESERVED=true
+         export RESERVED=false
       else
          echo "Checking for on-demand servers."
          export RESERVED=false
@@ -66,8 +67,8 @@ Provisioning:
     - export TF_VAR_name="$NAME-$ENVIRONMENT"
     - >
       if [ $CI_COMMIT_REF_NAME == "production" ]; then
-         echo "Write reserved node config"
-         mv ./terraform/reserved_override ./terraform/override.tf
+         # echo "Write reserved node config"
+         # mv ./terraform/reserved_override ./terraform/override.tf
       else
          echo "Skipping reservations"
       fi
