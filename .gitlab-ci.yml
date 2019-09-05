@@ -99,20 +99,7 @@ Release:
     entrypoint: [""]
   script:
     - cd terraform
-    - echo "---" > nodes.env
-    - echo "nodes:" >> nodes.env
-    - >
-      MASTERS=$(terraform output "masters")
-      for master in ${MASTERS[@]}; do
-        echo "  - addr: $master" >> nodes.env
-        echo "    role: master" >> nodes.env
-      done
-    - >
-      WORKERS=$(terraform output "workers")
-      for worker in ${WORKERS[@]}; do
-        echo "  - addr: $worker" >> nodes.env
-        echo "    role: worker" >> nodes.env
-      done
+    - ../create_nodes.sh
   dependencies:
     - Provisioning
   artifacts:
