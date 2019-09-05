@@ -100,6 +100,8 @@ Release:
   script:
     - apk update && apk add bash
     - cd terraform
+    - pwd
+    - sleep 1000000
     - ../create_nodes.sh
   dependencies:
     - Provisioning
