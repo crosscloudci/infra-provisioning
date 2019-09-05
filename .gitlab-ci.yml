@@ -99,6 +99,7 @@ Release:
     entrypoint: [""]
   script:
     - cd terraform
+    - sleep 1000000
     - ../create_nodes.sh
   dependencies:
     - Provisioning
