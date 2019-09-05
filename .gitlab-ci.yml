@@ -67,7 +67,7 @@ Provisioning:
     - >
       if [ $CI_COMMIT_REF_NAME == "production" ]; then
          echo "Write reserved node config"
-         cp ./reserved_instances ./terraform/override.tf
+         mv ./terraform/reserved_override ./terraform/override.tf
       else
          echo "Skipping reservations"
       fi

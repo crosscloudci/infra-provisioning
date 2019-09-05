@@ -3,6 +3,7 @@
 RESERVED=${RESERVED:-false}
 FACILITYS=${FACILITYS:-sjc1 ewr1 ams1 nrt1 dfw2}
 PACKET_AUTH_TOKEN=${PACKET_AUTH_TOKEN:-"$TF_VAR_packet_api_key"}
+PACKET_PROJECT_ID=${PACKET_PROJECT_ID:-"$TF_VAR_packet_project_id"}
 MASTER_NODE_COUNT=${MASTER_NODE_COUNT:-"$TF_VAR_packet_master_node_count"}
 WORKER_NODE_COUNT=${WORKER_NODE_COUNT:-"$TF_VAR_packet_worker_node_count"}
 MASTER_PLAN=${MASTER_PLAN:-"$TF_VAR_packet_master_device_plan"}
