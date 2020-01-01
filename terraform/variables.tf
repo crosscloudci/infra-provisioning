@@ -1,17 +1,28 @@
+
+variable "packet_api_key" {}
 provider "packet" {
 
   auth_token = "${ var.packet_api_key }"
 }
 
-variable "name" {}
-variable "packet_api_key" {}
-variable "packet_project_id" {}
 
-variable "packet_master_node_count" { default = "1" }
-variable "packet_worker_node_count" { default = "1" }
-variable "packet_facility" { default = "sjc1" }
-variable "packet_billing_cycle" { default = "hourly" }
+variable "node_group_one_project_id" {}
+variable "node_group_two_project_id" {}
 
-variable "packet_master_device_plan" { default = "m2.xlarge.x86" }
-variable "packet_worker_device_plan" { default = "m2.xlarge.x86" }
-variable "packet_operating_system" { default = "ubuntu_16_04" }
+variable "node_group_one_name" { default = "infra-group-one" }
+variable "node_group_two_name" { default = "infra-group-two" }
+
+variable "node_group_one_count" { default = "1" }
+variable "node_group_two_count" { default = "1" }
+
+variable "node_group_one_facility" { default = "sjc1" }
+variable "node_group_two_facility" { default = "sjc1" }
+
+variable "node_group_one_billing_cycle" { default = "hourly" }
+variable "node_group_two_billing_cycle" { default = "hourly" }
+
+variable "node_group_one_device_plan" { default = "m2.xlarge.x86" }
+variable "node_group_two_device_plan" { default = "m2.xlarge.x86" }
+
+variable "node_group_one_operating_system" { default = "ubuntu_16_04" }
+variable "node_group_two_operating_system" { default = "ubuntu_16_04" }

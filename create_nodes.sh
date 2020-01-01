@@ -1,7 +1,7 @@
 #!/bin/bash
 
-MASTERS=($(terraform output "masters"))
-WORKERS=($(terraform output "workers"))
+MASTERS=($(terraform output "node_group_one"))
+WORKERS=($(terraform output "node_group_two"))
 
 echo "---" > nodes.env
 echo "nodes:" >> nodes.env

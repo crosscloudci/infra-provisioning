@@ -1,21 +1,21 @@
-resource "packet_device" "master" {
-  count            = "${ var.packet_master_node_count }"
-  hostname         = "${ var.name }-master${ count.index + 1 }"
-  facilities       = ["${ var.packet_facility }"]
-  project_id       = "${ var.packet_project_id }"
-  plan             = "${ var.packet_master_device_plan }" # Packet.net machine type
-  billing_cycle    = "${ var.packet_billing_cycle }" # hourly or monthly
-  operating_system = "${ var.packet_operating_system }"
+resource "packet_device" "node_group_one" {
+  project_id       = "${ var.node_group_one_project_id }"
+  hostname         = "${ var.node_group_one_name }${ count.index + 1 }"
+  count            = "${ var.node_group_one_count }"
+  facilities       = ["${ var.node_group_one_facility }"]
+  plan             = "${ var.node_group_one_device_plan }" # Packet.net machine type
+  billing_cycle    = "${ var.node_group_one_billing_cycle }" # hourly or monthly
+  operating_system = "${ var.node_group_one_operating_system }"
  
 }
 
-resource "packet_device" "worker" {
-  count            = "${ var.packet_worker_node_count }"
-  hostname         = "${ var.name }-worker${ count.index + 1 }"
-  facilities       = ["${ var.packet_facility }"]
-  project_id       = "${ var.packet_project_id }"
-  plan             = "${ var.packet_worker_device_plan }" # Packet.net machine type
-  billing_cycle    = "${ var.packet_billing_cycle }" # hourly or monthly
-  operating_system = "${ var.packet_operating_system }"
- 
+resource "packet_device" "node_group_two" {
+  project_id       = "${ var.node_group_two_project_id }"
+  hostname         = "${ var.node_group_two_name }${ count.index + 1 }"
+  count            = "${ var.node_group_two_count }"
+  facilities       = ["${ var.node_group_two_facility }"]
+  plan             = "${ var.node_group_two_device_plan }" # Packet.net machine type
+  billing_cycle    = "${ var.node_group_two_billing_cycle }" # hourly or monthly
+  operating_system = "${ var.node_group_two_operating_system }"
+
 }
