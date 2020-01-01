@@ -1,8 +1,8 @@
 
-variable "packet_api_key" {}
+variable "packet_auth_token" {}
 provider "packet" {
 
-  auth_token = "${ var.packet_api_key }"
+  auth_token = "${ var.packet_auth_token }"
 }
 
 
