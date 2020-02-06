@@ -19,3 +19,14 @@ resource "packet_device" "node_group_two" {
   operating_system = "${ var.node_group_two_operating_system }"
 
 }
+
+resource "packet_device" "node_group_three" {
+  project_id       = "${ var.node_group_three_project_id }"
+  hostname         = "${ var.node_group_three_name }${ count.index + 1 }"
+  count            = "${ var.node_group_three_count }"
+  facilities       = ["${ var.node_group_three_facility }"]
+  plan             = "${ var.node_group_three_device_plan }" # Packet.net machine type
+  billing_cycle    = "${ var.node_group_three_billing_cycle }" # hourly or monthly
+  operating_system = "${ var.node_group_three_operating_system }"
+
+}
