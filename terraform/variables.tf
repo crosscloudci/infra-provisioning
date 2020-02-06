@@ -8,7 +8,7 @@ provider "packet" {
 
 variable "node_group_one_project_id" {}
 variable "node_group_two_project_id" {}
-variable "node_group_three_project_id" {}
+variable "node_group_three_project_id" { default = "null" }
 
 variable "node_group_one_name" { default = "infra-group-one" }
 variable "node_group_two_name" { default = "infra-group-two" }
