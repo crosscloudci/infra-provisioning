@@ -2,7 +2,7 @@
 
 MASTERS=($(terraform output "node_group_one"))
 WORKERS_TWO=($(terraform output "node_group_two"))
-WORKERS_THREE=($(terraform output "node_group_three"))
+WORKERS_THREE=($(terraform output "node_group_three" || true))
 
 echo "---" > nodes.env
 echo "nodes:" >> nodes.env
