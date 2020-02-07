@@ -12,12 +12,12 @@ for master in "${MASTERS[@]}"; do
     echo "    role: master" >> nodes.env
 done
 
-for worker in "${WORKERS[@]}"; do
+for worker in "${WORKERS_TWO[@]}"; do
     echo "  - addr: $worker" >> nodes.env
     echo "    role: worker" >> nodes.env
 done
 
-for worker in "${WORKERS[@]}"; do
+for worker in "${WORKERS_THREE[@]}"; do
     echo "  - addr: $worker" >> nodes.env
     echo "    role: worker" >> nodes.env
 done
