@@ -27,23 +27,23 @@ Check-Capacity:
     variables:
       - $DESTROY == null
   script:
-    - >
-      if [ -z "$DESTROY" ]; then
-         apt update && apt -y install jq curl
-      else
-         echo "Skip for destroy"
-         exit 0
-      fi
-    - >
-      if [ $CI_COMMIT_REF_NAME == "production" ]; then
-         echo "Checking for reserved servers."
-         # export RESERVED=true
-         export RESERVED=false
-      else
-         echo "Checking for on-demand servers."
-         export RESERVED=false
-      fi
-    - source ./capacity.sh
+    # - >
+    #   if [ -z "$DESTROY" ]; then
+    #      apt update && apt -y install jq curl
+    #   else
+    #      echo "Skip for destroy"
+    #      exit 0
+    #   fi
+    # - >
+    #   if [ $CI_COMMIT_REF_NAME == "production" ]; then
+    #      echo "Checking for reserved servers."
+    #      # export RESERVED=true
+    #      export RESERVED=false
+    #   else
+    #      echo "Checking for on-demand servers."
+    #      export RESERVED=false
+    #   fi
+    # - source ./capacity.sh
     - echo "export TF_VAR_packet_facility=$FACILITY" > facility.env
 
   artifacts:
